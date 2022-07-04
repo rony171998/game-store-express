@@ -14,9 +14,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 
 const getAllUsers = catchAsync(async (req, res, next) => {
-	const users = await User.findAll({
-		include: Review,
-	});
+	const users = await User.findAll({	});
 
 	res.status(200).json({
 		status: 'success',
@@ -45,7 +43,7 @@ const createUser = catchAsync(async (req, res, next) => {
 });
 
 
-const Login = catchAsync(async (req, res, next) => {
+const login = catchAsync(async (req, res, next) => {
 	const { email, password } = req.body;
 
 	// Validate credentials (email)
@@ -108,7 +106,7 @@ const deleteUser = catchAsync(async (req, res, next) => {
 module.exports = {
 	getAllUsers,
 	createUser,
-	Login,
+	login,
 	getUserById,
 	updateUser,
 	deleteUser,

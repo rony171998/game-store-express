@@ -6,6 +6,8 @@ const {
 	createGame,
 	updateGame,
 	deleteGame,
+	postReview,
+	getGameById,
 } = require('../controllers/games.controller');
 
 
@@ -20,10 +22,12 @@ gamesRouter.post('/', createGameValidators, createGame);
 
 gamesRouter.get('/', getAllGame);
 
+gamesRouter.get('/:id',gameExists, getGameById);
+
 gamesRouter.patch('/:id', gameExists, updateGame);
 
 gamesRouter.delete('/:id', gameExists, deleteGame);
 
-gamesRouter.post('/reviews/:gameId', createGameValidators, createGame);
+gamesRouter.post('/reviews/:gameId',gameExists, postReview);
 
 module.exports = { gamesRouter };

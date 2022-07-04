@@ -14,7 +14,7 @@ const Review = db.define('review',
         allowNull: false,
 
     },
-    gameid:{
+    gameId:{
         foreignkey: true,
         type: DataTypes.INTEGER,
         allowNull: false,

@@ -4,7 +4,7 @@ const express = require('express');
 const {
 	getAllUsers,
 	createUser,
-	Login,
+	login,
 	getUserById,
 	updateUser,
 	deleteUser,
@@ -24,17 +24,18 @@ const usersRouter = express.Router();
 
 usersRouter.post('/', createUserValidators, createUser);
 
-usersRouter.post('/login', Login);
-
-usersRouter.use(protectSession);
+usersRouter.post('/login', login);
 
 usersRouter.get('/', getAllUsers);
 
+usersRouter.get('/:id',userExists, getUserById);
+/*
+usersRouter.use(protectSession);
 usersRouter
 	.use('/:id', userExists)
 	.route('/:id')
 	.get(getUserById)
 	.patch(protectUserAccount, updateUser)
 	.delete(protectUserAccount, deleteUser);
-
+*/
 module.exports = { usersRouter };

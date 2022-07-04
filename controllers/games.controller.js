@@ -21,16 +21,21 @@ const createGame = catchAsync(async (req, res, next) => {
 
 const getAllGame = catchAsync(async (req, res, next) => {
     const games = await Game.findAll({
-        include: [
-			{ model:Game, include: [{ model: Review, model: User }] },
-			{ model: Console },
-		],
     });
 
     res.status(200).json({
         status: "success",
         games,
     });
+});
+
+const getGameById = catchAsync(async (req, res, next) => {
+	const { game } = req;
+
+	res.status(200).json({
+		status: 'success',
+		game,
+	});
 });
 
 const updateGame = catchAsync(async (req, res, next) => {
@@ -53,23 +58,24 @@ const deleteGame = catchAsync(async (req, res, next) => {
 const postReview = catchAsync(async (req, res, next) => {
     const { game } = req;
     const { userId, comment } = req.body;
-    if (!userId || !game.id) {
-        return next(new AppError("Please provide a userId", 400));
-    } else {
-        const newReview = await Review.create({
-            userId,
-            gameId: game.id,
-            comment,
-        });
 
-        res.status(200).json({ status: "success" });
-    }
+    const newReview = await Review.create({
+        userId,
+        gameId: game.id,
+        comment,
+    });
+
+    res.status(200).json({ 
+        status: "success", 
+        newReview 
+    });
 });
 
 module.exports = {
     createGame,
     getAllGame,
+    getGameById,
     updateGame,
     deleteGame,
-	postReview,
+    postReview,
 };

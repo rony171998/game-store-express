@@ -18,7 +18,7 @@ db.authenticate()
 	.then(() => console.log('Db authenticated'))
 	.catch(err => console.log(err));
 
-
+	
 User.hasMany(Review, { foreignKey: 'userId' });
 Review.belongsTo(User);
 

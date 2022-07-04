@@ -8,12 +8,12 @@ const Gamesinconsoles = db.define('gamesinconsoles',
         autoIncrement: true,
         allowNull: false,
     },
-    gameid:{
+    gameId:{
         foreignkey: true,
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    consoleid:{
+    consoleId:{
         foreignkey: true,
         type: DataTypes.INTEGER,
         allowNull: false,

@@ -6,3 +6,4 @@ develoment.env
 .env.local
 .env.development
 .env.production
+config.js

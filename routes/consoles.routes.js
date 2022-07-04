@@ -7,6 +7,7 @@ const {
 	getAllConsole,
 	updateConsole,
 	deleteConsole,
+	getConsoleById,
 } = require('../controllers/consoles.controller');
 
 
@@ -20,6 +21,8 @@ const consolesRouter = express.Router();
 consolesRouter.post('/', createConsoleValidators, createConsole);
 
 consolesRouter.get('/', getAllConsole);
+
+consolesRouter.get('/:id',consoleExists, getConsoleById);
 
 consolesRouter.patch('/:id', consoleExists, updateConsole);
 

@@ -28,6 +28,15 @@ const getAllConsole = catchAsync(async (req, res, next) => {
 	});
 });
 
+const getConsoleById = catchAsync(async (req, res, next) => {
+	const { console } = req;
+
+	res.status(200).json({
+		status: 'success',
+		console,
+	});
+});
+
 const updateConsole = catchAsync(async (req, res, next) => {
 	const { console } = req;
 	const { name } = req.body;
@@ -49,5 +58,6 @@ module.exports = {
     createConsole,
     getAllConsole,
     updateConsole,
-    deleteConsole
+    deleteConsole,
+	getConsoleById,
 }

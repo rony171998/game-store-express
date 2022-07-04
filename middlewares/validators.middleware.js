@@ -33,7 +33,7 @@ const createConsoleValidators = [
 	body('company').notEmpty().withMessage('Company cannot be empty'),
 ]
 const createGameValidators = [
-	body('title').notEmpty().withMessage('Name cannot be empty'),
+	body('title').notEmpty().withMessage('Title cannot be empty'),
 	body('genre').notEmpty().withMessage('Genre cannot be empty'),
 ]
 
