@@ -1,6 +1,7 @@
 const {db , DataTypes} = require('../utils/database.util');
 
-const gamesinconsoles = db.define('gamesinconsoles',{
+const Gamesinconsoles = db.define('gamesinconsoles',
+{
     id: {
         primaryKey: true,
         type: DataTypes.INTEGER,
@@ -22,5 +23,6 @@ const gamesinconsoles = db.define('gamesinconsoles',{
         allowNull: false,
         defaultValue: 'active',
     }
-}
+    }
 );
+module.exports = { Gamesinconsoles };

@@ -1,20 +1,21 @@
 const {db , DataTypes} = require('../utils/database.util');
 
-const Games = db.define('game',{
+const Console = db.define('console',{
     id: {
         primaryKey: true,
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
     },
-    title:{
+    name:{
         type: DataTypes.STRING,
         allowNull: false,
 
     },
-    genre:{
+    company:{
         type: DataTypes.STRING,
         allowNull: false,
+
     },
     status:{
         type: DataTypes.STRING,
@@ -22,3 +23,5 @@ const Games = db.define('game',{
         defaultValue: 'active',
     }
 });
+
+module.exports = { Console };

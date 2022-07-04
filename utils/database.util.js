@@ -6,7 +6,7 @@ const db = new Sequelize({
     username: 'postgres',
     password: 'pass1234',
     port: 5432,
-    database: 'tasks',
+    database: 'game-store',
 	logging: false,
 });
 

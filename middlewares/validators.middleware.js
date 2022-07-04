@@ -27,19 +27,14 @@ const createUserValidators = [
 		.withMessage('Password must contain letters and numbers'),
 	checkResult,
 ];
-const createTaskValidators = [
+
+const createConsoleValidators = [
+	body('name').notEmpty().withMessage('Name cannot be empty'),
+	body('company').notEmpty().withMessage('Company cannot be empty'),
+]
+const createGameValidators = [
 	body('title').notEmpty().withMessage('Name cannot be empty'),
-    body('userId')
-		.notEmpty().withMessage('UserId cannot be empty')
-		.isNumeric().withMessage("UserId must be a number"),
-		
-    body('limitDate')
-		.notEmpty().withMessage("LimitDate cannot be empty")
-		.isISO8601({format: 'yyyy-MM-dd HH:mm:ss'}).withMessage("LimitDate must be a date")
-		.isLength({ min: 10 }).withMessage("LimitDate must be a valid date 10 numbers"),
-		
-    checkResult,
-];
+	body('genre').notEmpty().withMessage('Genre cannot be empty'),
+]
 
-
-module.exports = { createUserValidators , createTaskValidators };
+module.exports = { createUserValidators  , createConsoleValidators , createGameValidators };

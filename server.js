@@ -2,8 +2,10 @@ const { app } = require('./app');
 
 // Models
 const { User } = require('./models/user.model');
-const { Task } = require('./models/task.model');
-
+const { Review } = require('./models/review.model');
+const { Game } = require('./models/game.model');
+const { Gamesinconsoles } = require('./models/gamesinconsoles.model');
+const { Console } = require('./models/console.model');
 // Utils
 const { db } = require('./utils/database.util');
 const config = require('./config');
@@ -17,8 +19,15 @@ db.authenticate()
 	.catch(err => console.log(err));
 
 
-User.hasMany(Task, { foreignKey: 'userId' });
-Task.belongsTo(User);
+User.hasMany(Review, { foreignKey: 'userId' });
+Review.belongsTo(User);
+
+Review.belongsTo(Game);
+Game.hasMany(Review, { foreignKey: 'gameId' });
+Game.hasMany(Gamesinconsoles, { foreignKey: 'gameId' });
+Console.hasMany(Gamesinconsoles, { foreignKey: 'consoleId' });
+Gamesinconsoles.belongsTo(Game)
+Gamesinconsoles.belongsTo(Console)
 
 db.sync()
 	.then(() => console.log('Db synced'))
