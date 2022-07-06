@@ -1,7 +1,7 @@
 const { Game } = require("../models/game.model");
 const { Review } = require("../models/review.model");
 const { User } = require("../models/user.model");
-const { Console } = require("../models/console.model");
+const { Gamesinconsoles } = require("../models/gamesinconsoles.model");
 
 const { catchAsync } = require("../utils/catchAsync.util");
 
@@ -21,6 +21,11 @@ const createGame = catchAsync(async (req, res, next) => {
 
 const getAllGame = catchAsync(async (req, res, next) => {
     const games = await Game.findAll({
+        include: [
+            {
+                model: Review, include: { model: User },
+            },
+        ]
     });
 
     res.status(200).json({
@@ -71,6 +76,22 @@ const postReview = catchAsync(async (req, res, next) => {
     });
 });
 
+const postGameInConsole = catchAsync(async (req, res, next) => {
+    const { Gamesinconsole } = req;
+    const { consoleId } = req.body;
+
+    const newGameinconsole = await Gamesinconsoles.create({
+        consoleId,       
+        gameId: Gamesinconsole.id,
+        
+    });
+
+    res.status(200).json({ 
+        status: "success", 
+        newGameinconsole 
+    });
+});
+
 module.exports = {
     createGame,
     getAllGame,
@@ -78,4 +99,5 @@ module.exports = {
     updateGame,
     deleteGame,
     postReview,
+    postGameInConsole,
 };

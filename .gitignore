@@ -7,3 +7,4 @@ develoment.env
 .env.development
 .env.production
 config.js
+config.env

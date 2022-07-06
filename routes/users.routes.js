@@ -26,16 +26,18 @@ usersRouter.post('/', createUserValidators, createUser);
 
 usersRouter.post('/login', login);
 
+usersRouter.use(protectSession);
+
 usersRouter.get('/', getAllUsers);
 
 usersRouter.get('/:id',userExists, getUserById);
-/*
-usersRouter.use(protectSession);
+
+
 usersRouter
 	.use('/:id', userExists)
 	.route('/:id')
 	.get(getUserById)
 	.patch(protectUserAccount, updateUser)
 	.delete(protectUserAccount, deleteUser);
-*/
+
 module.exports = { usersRouter };

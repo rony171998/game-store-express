@@ -1,6 +1,7 @@
 // Models
 const { User } = require('../models/user.model');
 const { Review } = require('../models/review.model');
+const { Game } = require('../models/game.model');
 
 // Utils
 const { catchAsync } = require('../utils/catchAsync.util');
@@ -10,15 +11,21 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
-// Gen secrets for JWT, require('crypto').randomBytes(64).toString('hex')
+ //Gen secrets for JWT, require('crypto').randomBytes(64).toString('hex')
 dotenv.config({ path: './config.env' });
 
 const getAllUsers = catchAsync(async (req, res, next) => {
-	const users = await User.findAll({	});
+	const user = await User.findAll({ where: { status: 'active' }, 
+		include: [
+			{
+				model: Review, include: {model: Game}
+			},
+		],
+	});
 
 	res.status(200).json({
 		status: 'success',
-		users,
+		user,
 	});
 });
 

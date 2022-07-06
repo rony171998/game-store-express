@@ -8,10 +8,6 @@ const { Gamesinconsoles } = require('./models/gamesinconsoles.model');
 const { Console } = require('./models/console.model');
 // Utils
 const { db } = require('./utils/database.util');
-const config = require('./config');
-
-
-console.log('NODE_ENV:'+ config.NODE_ENV);
 
 
 db.authenticate()
@@ -32,7 +28,9 @@ Gamesinconsoles.belongsTo(Console)
 db.sync()
 	.then(() => console.log('Db synced'))
 	.catch(err => console.log(err));
-
-app.listen(config.PORT,config.HOST,  () => {
-	console.log('Express app running!! on port '+config.PORT +' on port '+config.HOST);
+	
+	const PORT = process.env.DB_PORT;
+	const HOST = process.env.DB_HOST;
+app.listen(PORT,HOST,  () => {
+	console.log('Express app running!! on port '+PORT +' on port '+HOST);
 });
